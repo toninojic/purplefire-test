@@ -1,2 +1,267 @@
-.main { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
-.hero { padding: 4rem 0; }
+.main {
+  padding: 0;
+}
+
+/* HERO layout */
+.hero {
+  position: relative;
+  min-height: 80dvh;
+  display: flex;
+  flex-direction: column; /* mobile: stacked */
+}
+
+/* IMAGE: on mobile je iza teksta */
+.visual {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* COPY */
+.copy {
+  position: relative;
+  z-index: 1;
+  padding: 10rem 1.25rem;
+  text-align: center;
+}
+
+.kicker {
+  display: inline-block;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+.title {
+  font-family: Georgia, 'Times New Roman', serif;
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1.2;
+  margin: 0.5rem 0 1rem;
+  padding: 0 2rem;
+}
+
+.lead {
+  color: #fff;
+  line-height: 1.6;
+}
+
+.scrollBtn {
+  margin-top: 1.5rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  color: #111;
+}
+
+/* SERVICES */
+.services {
+  background: #f6f1ec;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem 1rem;
+}
+
+.servicesLeft {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.servicesTitle {
+  font-family: Georgia, 'Times New Roman', serif;
+  color: #7a4b3a;
+  font-size: 2rem;
+  line-height: 1.2;
+  margin: 0 0 0.5rem;
+}
+
+.linkMore {
+  color: #7a4b3a;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.servicesRight {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.serviceItem {
+  flex: 1 1 100%;
+}
+
+.serviceItem h3 {
+  color: #7a4b3a;
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+}
+
+.serviceItem p {
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* TRENDS / NEWSLETTER */
+.trends {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 2rem 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.trendsLeft {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.trendsLeft h2 {
+  font-size: 1.6rem;
+  color: #111;
+  margin: 0 0 0.25rem;
+}
+
+.trendsLeft p {
+  color: #6b7280;
+  margin: 0 0 0.5rem;
+}
+
+.trendsForm {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.trendsForm input {
+  flex: 1 1 auto;
+  min-width: 200px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 0.7rem 0.9rem;
+}
+
+.trendsForm button {
+  border: 1px solid #4b5563;
+  background: #4b5563;
+  color: #fff;
+  border-radius: 6px;
+  padding: 0.7rem 1rem;
+}
+
+/* INSPIRATIONS */
+.inspirations {
+  width: 100vw;
+  padding: 2rem 0 3rem;
+}
+
+.inspTitle {
+  max-width: 1200px;
+  margin: 0 auto 1rem;
+  font-family: Georgia, 'Times New Roman', serif;
+  color: #7a4b3a;
+  font-size: 1.8rem;
+}
+
+.inspNote {
+  max-width: 900px;
+  margin: 1rem auto 0;
+  color: #6b7280;
+  line-height: 1.7;
+}
+
+.inspPager {
+  max-width: 1200px;
+  margin: 0.75rem auto 0;
+  color: #6b7280;
+}
+
+/* DESKTOP ≥ 1024px */
+@media (min-width: 1024px) {
+  .hero {
+    min-height: 86dvh;
+    flex-direction: row; /* side by side */
+  }
+
+  .visual {
+    position: relative;
+    flex: 1.1;
+    z-index: 0;
+  }
+
+  .visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .services {
+    background: #f6f1ec;
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    padding: 2rem 1rem;
+  }
+
+  .servicesLeft {
+    width: 50%;
+  }
+
+  .servicesRight {
+    width: 50%;
+  }
+
+  .serviceItem {
+    flex: 1 1 35%;
+  }
+
+  .copy {
+    flex: 0.9;
+    align-self: center;
+    background: #f6f1ec;
+    padding: 15rem 4rem 4rem 6rem;
+    height: -webkit-fill-available;
+    text-align: start;
+  }
+
+  .title {
+    font-size: 3rem;
+    color: #a06056;
+    padding: 0;
+  }
+
+  .lead {
+    font-size: 1rem;
+    color: #a06056;
+  }
+  .kicker {
+    color: #a06056;
+  }
+  
+  .trends {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 2.5rem 1.5rem;
+  }
+
+  .trendsLeft,
+  .trendsForm {
+    width: 50%;
+  }
+}

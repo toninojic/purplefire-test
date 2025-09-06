@@ -1,0 +1,86 @@
+.wrap {
+  position: relative;
+  margin: 0 auto;
+}
+
+/* viewport krije višak i zadržava visinu */
+.viewport {
+  overflow: hidden;
+  padding: 0.25rem 0;
+}
+
+/* traka sa dupliranim karticama; animacija ide non-stop */
+.track {
+  display: inline-flex;
+  gap: 1rem;
+  will-change: transform;
+  animation-name: marquee;
+  animation-duration: var(--duration, 30s);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: normal; /* default */
+}
+
+/* smer menja samo direction (desktop i mobilni) */
+.track[data-dir="reverse"] {
+  animation-direction: reverse;
+}
+
+/* kartice */
+.card {
+  flex: 0 0 220px;
+  height: 300px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fafafa;
+  border: 1px solid #eee;
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* strelice – samo desktop */
+.ctrl {
+  display: none;
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  color: #7a4b3a;
+  font-size: 20px;
+  line-height: 1;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+
+.prev { left: -12px; }
+.next { right: -12px; }
+
+@media (min-width: 1024px) {
+  .ctrl {
+    display: inline-flex;
+    cursor: pointer;
+  }
+  .card {
+    flex-basis: 260px;
+    height: 340px;
+  }
+}
+
+/* ključna animacija – pomeramo traku za 50% širine (pošto je niz dupliran) */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
