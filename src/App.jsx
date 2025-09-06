@@ -1,16 +1,14 @@
-import { useState } from 'react'
-import './App.css'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import Home from '../pages/home/index.jsx'
+import LandingPage from '../pages/landing/index.jsx'
+import PDPPage from '../pages/pdp/index.jsx'
 
-function App() {
-  const [count, setCount] = useState(0)
+const router = createBrowserRouter([
+  { path: '/', element: <Home /> },
+  { path: '/landing', element: <LandingPage /> },
+  { path: '/pdp', element: <PDPPage /> },
+])
 
-  return (
-    <>
-      <div>
-        
-      </div>
-    </>
-  )
+export default function App() {
+  return <RouterProvider router={router} />
 }
-
-export default App
