@@ -1,13 +1,35 @@
+import { useEffect, useState } from 'react'
 import styles from './footer.module.css'
 
-const COLS = {
+const COLS_MOBILE = {
+  About: ['Our story', 'Our stores', 'Our partners'],
+  Products: ['Furniture', 'Decoration', 'Storage', 'Baby and child', 'Connected home'],
+  Services: ['Click and collect', 'Conception', 'Installation', 'Advices', 'Gift card'],
+  Rooms: ['Living room', 'Dining room', 'Cooked', 'Bedroom', 'Bathroom', 'Office', 'Laundry', 'Garage'],
+};
+
+const COLS_DESKTOP = {
   Products: ['Furniture', 'Decoration', 'Storage', 'Baby and child', 'Connected home'],
   Rooms: ['Living room', 'Dining room', 'Cooked', 'Bedroom', 'Bathroom', 'Office', 'Laundry', 'Garage'],
   Services: ['Click and collect', 'Conception', 'Installation', 'Advices', 'Gift card'],
   About: ['Our story', 'Our stores', 'Our partners'],
-}
+};
+
 
 export default function Footer() {
+  const [isDesktop, setIsDesktop] = useState(
+    () => window.matchMedia('(min-width: 1024px)').matches
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)');
+    const handler = (e) => setIsDesktop(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+
+  const COLS = isDesktop ? COLS_DESKTOP : COLS_MOBILE;
+
   return (
     <footer className={styles.footer}>
       <div className={styles.top}>
@@ -32,16 +54,13 @@ export default function Footer() {
             <img src="/images/footer.png" alt="Sustainable interior" />
           </div>
           <p className={styles.note}>
-            We&apos;re taking positive steps to reduce our impact on the planet.
-            For us, that means retailing responsibly.
+            We’re taking positive steps to reduce our impact on the planet. For us, that means retailing responsibly.
           </p>
           <a href="#" className={styles.more}>Learn more ›</a>
         </aside>
       </div>
 
       <div className={styles.bottom}>
-        <small className={styles.copy}>© 2021 Agence Dnd</small>
-
         <div className={styles.social} aria-label="Social">
           <a href="#" aria-label="Facebook" className={styles.ic}>
             <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M13 10h3l-1 4h-2v8h-4v-8H7v-4h2V8a4 4 0 0 1 4-4h3v4h-3a1 1 0 0 0-1 1v1z"/></svg>
@@ -57,11 +76,15 @@ export default function Footer() {
           </a>
         </div>
 
-        <ul className={styles.legal}>
-          <li><a href="#">Privacy policy</a></li>
-          <li><a href="#">Term of service</a></li>
-          <li><a href="#">Language</a></li>
-        </ul>
+        <div className={styles.legalContainer}>
+          <ul className={styles.legal}>
+            <li><a href="#">Privacy policy</a></li>
+            <li><a href="#">Term of service</a></li>
+            <li><a href="#">Language</a></li>
+          </ul>
+      
+          <small className={styles.copy}>© 2021 Agence Dnd</small>
+        </div>
       </div>
     </footer>
   )

@@ -1,9 +1,17 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './header.module.css'
 import { Link } from 'react-router-dom'
 
 export default function Header() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (open) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => { document.body.style.overflow = prev; };
+    }
+  }, [open]);
 
   return (
     <header className={styles.header}>
@@ -20,20 +28,21 @@ export default function Header() {
 
         {/* hamburger */}
         <button
-          className={styles.burger}
-          aria-label="Open menu"
+          className={`${styles.burger} ${open ? styles.burgerOpen : ''}`}
+          aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
           onClick={() => setOpen(v => !v)}
         >
           <span />
           <span />
-          <span />
         </button>
       </div>
 
+      {open && <div className={styles.overlay} onClick={() => setOpen(false)} />}
+
       {/* mobile menu */}
       {open && (
-        <div className={styles.mobileMenu} role="dialog" aria-modal="true">
+        <div className={`${styles.mobileMenu} ${styles.mobileMenuOpen}`} role="dialog" aria-modal="true">
           <nav className={styles.navMobile}>
             <a href="#" onClick={() => setOpen(false)}>Products</a>
             <a href="#" onClick={() => setOpen(false)}>Rooms</a>

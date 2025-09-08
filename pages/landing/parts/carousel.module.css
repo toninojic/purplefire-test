@@ -3,30 +3,24 @@
   margin: 0 auto;
 }
 
-/* viewport krije višak i zadržava visinu */
 .viewport {
   overflow: hidden;
   padding: 0.25rem 0;
 }
 
-/* traka sa dupliranim karticama; animacija ide non-stop */
 .track {
   display: inline-flex;
-  gap: 1rem;
   will-change: transform;
   animation-name: marquee;
   animation-duration: var(--duration, 30s);
   animation-timing-function: linear;
   animation-iteration-count: infinite;
-  animation-direction: normal; /* default */
 }
 
-/* smer menja samo direction (desktop i mobilni) */
-.track[data-dir="reverse"] {
-  animation-direction: reverse;
+.noAnim {
+  animation: none !important;
 }
 
-/* kartice */
 .card {
   flex: 0 0 220px;
   height: 300px;
@@ -34,6 +28,7 @@
   overflow: hidden;
   background: #fafafa;
   border: 1px solid #eee;
+  margin: 16px 10px;
 }
 
 .card img {
@@ -42,7 +37,6 @@
   object-fit: cover;
 }
 
-/* strelice – samo desktop */
 .ctrl {
   display: none;
   position: absolute;
@@ -59,28 +53,18 @@
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  cursor: pointer;
 }
 
 .prev { left: -12px; }
 .next { right: -12px; }
 
 @media (min-width: 1024px) {
-  .ctrl {
-    display: inline-flex;
-    cursor: pointer;
-  }
-  .card {
-    flex-basis: 260px;
-    height: 340px;
-  }
+  .ctrl { display: inline-flex; }
+  .card { flex-basis: 260px; height: 340px; }
 }
 
-/* ključna animacija – pomeramo traku za 50% širine (pošto je niz dupliran) */
 @keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }

@@ -1,5 +1,5 @@
 .header {
-  position: fixed;
+  position: absolute;
   z-index: 10;
   width: 100%;
 }
@@ -7,16 +7,15 @@
 .inner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 2rem 1.5rem 1rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .logo {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #a06056;
+  font-size: 36px;
+  color: #fff;
   text-decoration: none;
 }
 
@@ -39,20 +38,20 @@
 .burger {
   display: inline-flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 9px;
   width: 36px;
   height: 36px;
   align-items: center;
   justify-content: center;
-  border: 1px solid #e5e7eb;
+  border: none;
   border-radius: 8px;
-  background: #fff;
+  background: transparent;
 }
 
 .burger span {
-  width: 18px;
+  width: 23px;
   height: 2px;
-  background: #111;
+  background: #fff;
   display: block;
 }
 
@@ -60,9 +59,57 @@
 .mobileMenu {
   position: absolute;
   inset: 100% 0 auto 0;
-  background: #fff;
-  border-top: 1px solid #e5e7eb;
   padding: 0.75rem 1rem;
+  text-align: right;
+  padding: 2rem 1.5rem 1rem 1.5rem;
+}
+
+/* === Overlay (ispod headera, iznad stranice) === */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity .25s ease;
+  z-index: -1; /* header je iznad (vidi dole) */
+}
+
+/* === Header iznad overlaya da burger ostane klikabilan === */
+.header {
+  z-index: 10; /* ako overlay stoji iznad, povecaj na 1100 i ostavi overlay manji */
+}
+
+/* === Burger animacija (2 crtice -> X) === */
+.burger {
+  position: relative;
+}
+.burger span {
+  transition: transform .25s ease, opacity .2s ease, background-color .2s ease;
+  transform-origin: center;
+}
+
+/* kad je otvoreno, pretvori 2 linije u X */
+.burgerOpen span:nth-child(1) {
+  transform: translateY(5.5px) rotate(45deg);
+}
+.burgerOpen span:nth-child(2) {
+  transform: translateY(-5.5px) rotate(-45deg);
+}
+
+/* opciono: promeni boju kada je otvoren */
+.burgerOpen span {
+  background: #fff; /* prilagodi po temi */
+}
+
+/* === Mobile menu – glatki ulaz === */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.mobileMenuOpen {
+  animation: fadeDown .22s ease both;
 }
 
 .navMobile {
@@ -71,19 +118,32 @@
 }
 
 .navMobile a {
-  color: #111827;
+  color: #fff;
   text-decoration: none;
   font-weight: 500;
+  font-size: 18px;
 }
 
 /* desktop breakpoint */
 @media (min-width: 1024px) {
+  .overlay { 
+    display: none;
+  }
+
+  .logo {
+    color: #a06056;
+  }
+
   .navDesktop {
     display: flex;
 	}		
 
+  .navDesktop a {
+    color: #706458;
+  }
+
   .header {
-    position: fixed;
+    position: absolute;
     z-index: 10;
     width: 50%;
    }
