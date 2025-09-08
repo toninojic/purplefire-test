@@ -26,15 +26,15 @@
 
 .navDesktop a {
   color: #a06056;
-  text-decoration: none;
   font-weight: 500;
+  text-decoration: none;
 }
 
 .navDesktop a:hover {
   color: #111827;
 }
 
-/* hamburger */
+/* === Hamburger === */
 .burger {
   display: inline-flex;
   flex-direction: column;
@@ -46,6 +46,7 @@
   border: none;
   border-radius: 8px;
   background: transparent;
+  position: relative;
 }
 
 .burger span {
@@ -53,18 +54,41 @@
   height: 2px;
   background: #fff;
   display: block;
+  transition: transform .25s ease, opacity .2s ease, background-color .2s ease;
+  transform-origin: center;
 }
 
-/* mobile menu panel */
+.burgerOpen span:nth-child(1) {
+  transform: translateY(5.5px) rotate(45deg);
+}
+
+.burgerOpen span:nth-child(2) {
+  transform: translateY(-5.5px) rotate(-45deg);
+}
+
+.burgerOpen span {
+  background: #fff;
+}
+
 .mobileMenu {
   position: absolute;
   inset: 100% 0 auto 0;
-  padding: 0.75rem 1rem;
-  text-align: right;
   padding: 2rem 1.5rem 1rem 1.5rem;
+  text-align: right;
 }
 
-/* === Overlay (ispod headera, iznad stranice) === */
+.navMobile {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.navMobile a {
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+}
+
 .overlay {
   position: fixed;
   inset: 0;
@@ -72,37 +96,9 @@
   opacity: 1;
   pointer-events: auto;
   transition: opacity .25s ease;
-  z-index: -1; /* header je iznad (vidi dole) */
+  z-index: -1; /* header ostaje iznad */
 }
 
-/* === Header iznad overlaya da burger ostane klikabilan === */
-.header {
-  z-index: 10; /* ako overlay stoji iznad, povecaj na 1100 i ostavi overlay manji */
-}
-
-/* === Burger animacija (2 crtice -> X) === */
-.burger {
-  position: relative;
-}
-.burger span {
-  transition: transform .25s ease, opacity .2s ease, background-color .2s ease;
-  transform-origin: center;
-}
-
-/* kad je otvoreno, pretvori 2 linije u X */
-.burgerOpen span:nth-child(1) {
-  transform: translateY(5.5px) rotate(45deg);
-}
-.burgerOpen span:nth-child(2) {
-  transform: translateY(-5.5px) rotate(-45deg);
-}
-
-/* opciono: promeni boju kada je otvoren */
-.burgerOpen span {
-  background: #fff; /* prilagodi po temi */
-}
-
-/* === Mobile menu – glatki ulaz === */
 @keyframes fadeDown {
   from { opacity: 0; transform: translateY(-8px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -112,21 +108,8 @@
   animation: fadeDown .22s ease both;
 }
 
-.navMobile {
-  display: grid;
-  gap: 0.75rem;
-}
-
-.navMobile a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 18px;
-}
-
-/* desktop breakpoint */
 @media (min-width: 1024px) {
-  .overlay { 
+  .overlay {
     display: none;
   }
 
@@ -136,7 +119,7 @@
 
   .navDesktop {
     display: flex;
-	}		
+  }
 
   .navDesktop a {
     color: #706458;
@@ -146,11 +129,11 @@
     position: absolute;
     z-index: 10;
     width: 50%;
-   }
+  }
 
-   .inner {
+  .inner {
     padding: 2rem 4rem 2rem 6rem;
-   }
+  }
 
   .burger,
   .mobileMenu {

@@ -29,9 +29,6 @@ const Carousel = forwardRef(function Carousel(
     return () => mq.removeEventListener('change', handler)
   }, [])
 
-  // render niz:
-  // - mobile: dupliran (za CSS marquee)
-  // - desktop: TRIPLICIRAN (…A B C | A B C | A B C…) za beskonačni ručni scroll
   const BLOCK = items.length
   const START_INDEX = BLOCK
   const renderItems = useMemo(() => {
@@ -39,22 +36,21 @@ const Carousel = forwardRef(function Carousel(
     return isDesktop ? [...items, ...items, ...items] : [...items, ...items]
   }, [items, isDesktop, BLOCK])
 
-  // ---- Desktop: ručni scroll sa beskonačnim wrap-om
-  const stepRef = useRef(0) // širina kartice + gap
+  const stepRef = useRef(0)
   const blockPxRef = useRef(0)
   const initDoneRef = useRef(false)
+  const settleTimerRef = useRef(null)
 
   const calcStep = () => {
     const vp = viewportRef.current
     if (!vp) return 0
-    const track = vp.firstElementChild // .track
+    const track = vp.firstElementChild
     const card = vp.querySelector(`.${styles.card}`)
     const gap = parseFloat(getComputedStyle(track).gap || '16') || 16
     const w = card ? card.getBoundingClientRect().width : 260
     return w + gap
   }
 
-  // inicijalno pozicioniranje + resize
   useEffect(() => {
     if (!isDesktop || !BLOCK) return
     const vp = viewportRef.current
@@ -63,7 +59,7 @@ const Carousel = forwardRef(function Carousel(
     const recalc = () => {
       stepRef.current = calcStep()
       blockPxRef.current = BLOCK * stepRef.current
-      vp.scrollLeft = START_INDEX * stepRef.current // centriraj na srednji blok
+      vp.scrollLeft = START_INDEX * stepRef.current
       initDoneRef.current = true
       const idx = normalize(Math.round(vp.scrollLeft / stepRef.current), BLOCK)
       onIndexChange?.(idx)
@@ -78,7 +74,6 @@ const Carousel = forwardRef(function Carousel(
     }
   }, [isDesktop, BLOCK, onIndexChange])
 
-  // wrap + index na scroll
   useEffect(() => {
     if (!isDesktop || !BLOCK) return
     const vp = viewportRef.current
@@ -104,27 +99,49 @@ const Carousel = forwardRef(function Carousel(
     return () => vp.removeEventListener('scroll', onScroll)
   }, [isDesktop, BLOCK, onIndexChange])
 
-  // ---- Mobile: CSS marquee + "sampler" (pager)
+  const settleWrap = () => {
+    const vp = viewportRef.current
+    if (!vp || !stepRef.current) return
+    if (settleTimerRef.current) clearTimeout(settleTimerRef.current)
+    settleTimerRef.current = setTimeout(() => {
+      const step = stepRef.current
+      const blockPx = blockPxRef.current
+      const startPx = START_INDEX * step
+      const endPx = (START_INDEX + BLOCK) * step
+      if (vp.scrollLeft >= endPx) vp.scrollLeft = vp.scrollLeft - blockPx
+      else if (vp.scrollLeft < startPx) vp.scrollLeft = vp.scrollLeft + blockPx
+    }, 120)
+  }
+
+  const scrollByCards = (dir) => {
+    if (!isDesktop || !BLOCK) return
+    const vp = viewportRef.current
+    if (!vp) return
+    const step = stepRef.current || calcStep()
+    const target = vp.scrollLeft + dir * step
+    vp.scrollTo({ left: target, behavior: 'smooth' })
+    settleWrap()
+  }
+
+  useImperativeHandle(ref, () => ({
+    next: () => scrollByCards(1),
+    prev: () => scrollByCards(-1),
+    scrollByCards,
+  }))
+
   useEffect(() => {
     if (isDesktop || !BLOCK) return
     let raf = 0
     const tick = () => {
       const vp = viewportRef.current
-      if (!vp) {
-        raf = requestAnimationFrame(tick)
-        return
-      }
+      if (!vp) { raf = requestAnimationFrame(tick); return }
       const cards = Array.from(vp.querySelectorAll(`.${styles.card}`))
       const vpLeft = vp.getBoundingClientRect().left
-      let bestIdx = 0
-      let bestDist = Infinity
+      let bestIdx = 0, bestDist = Infinity
       cards.forEach((el, i) => {
         const left = el.getBoundingClientRect().left - vpLeft
         const dist = Math.abs(left)
-        if (dist < bestDist) {
-          bestDist = dist
-          bestIdx = i
-        }
+        if (dist < bestDist) { bestDist = dist; bestIdx = i }
       })
       onIndexChange?.(normalize(bestIdx, BLOCK))
       raf = requestAnimationFrame(tick)
@@ -133,33 +150,7 @@ const Carousel = forwardRef(function Carousel(
     return () => cancelAnimationFrame(raf)
   }, [isDesktop, BLOCK, onIndexChange])
 
-  // trajanje marquee-a na mobilnom
   const duration = Math.max(18, BLOCK * 6)
-
-  // expose public API parentu (strelice iz parenta)
-  const scrollByCards = (dir) => {
-    if (!isDesktop || !BLOCK) return
-    const vp = viewportRef.current
-    if (!vp) return
-    const step = stepRef.current || calcStep()
-    const target = vp.scrollLeft + dir * step * 2 // pomeri po 2 kartice (promeni po želji)
-    vp.scrollTo({ left: target, behavior: 'smooth' })
-
-    // wrap nakon animacije
-    window.setTimeout(() => {
-      const blockPx = blockPxRef.current || BLOCK * step
-      const startPx = START_INDEX * step
-      const endPx = (START_INDEX + BLOCK) * step
-      if (vp.scrollLeft >= endPx) vp.scrollLeft = vp.scrollLeft - blockPx
-      else if (vp.scrollLeft < startPx) vp.scrollLeft = vp.scrollLeft + blockPx
-    }, 420)
-  }
-
-  useImperativeHandle(ref, () => ({
-    next: () => scrollByCards(1),
-    prev: () => scrollByCards(-1),
-    scrollByCards, // ako želiš ručno dir
-  }))
 
   return (
     <div className={styles.wrap}>

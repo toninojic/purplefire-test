@@ -4,7 +4,6 @@ import Carousel from './Carousel.jsx'
 
 const HERO_IMG = '/images/landing-hero.png'
 
-// demo slike za carousel (stavi svoje putanje u /public/images/)
 const CARDS = [
   { src: '/images/card-1.jpg', alt: 'Inspiration 1' },
   { src: '/images/card-2.jpg', alt: 'Inspiration 2' },
@@ -20,7 +19,7 @@ export default function Main() {
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024)
     checkMobile()
     window.addEventListener("resize", checkMobile)
     return () => window.removeEventListener("resize", checkMobile)

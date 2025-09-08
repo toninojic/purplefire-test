@@ -24,11 +24,11 @@
 .card {
   flex: 0 0 220px;
   height: 300px;
+  margin: 16px 10px;
+  border: 1px solid #eee;
   border-radius: 14px;
   overflow: hidden;
   background: #fafafa;
-  border: 1px solid #eee;
-  margin: 16px 10px;
 }
 
 .card img {
@@ -44,27 +44,42 @@
   translate: 0 -50%;
   width: 36px;
   height: 36px;
-  border-radius: 999px;
   border: 1px solid #e5e7eb;
+  border-radius: 999px;
   background: #fff;
   color: #7a4b3a;
   font-size: 20px;
   line-height: 1;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .06);
   cursor: pointer;
 }
 
-.prev { left: -12px; }
-.next { right: -12px; }
+.prev {
+  left: -12px;
+}
+
+.next {
+  right: -12px;
+}
 
 @media (min-width: 1024px) {
-  .ctrl { display: inline-flex; }
-  .card { flex-basis: 260px; height: 340px; }
+  .ctrl {
+    display: inline-flex;
+  }
+
+  .card {
+    flex-basis: 260px;
+    height: 340px;
+  }
 }
 
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }

@@ -2,7 +2,7 @@
   padding: 0;
 }
 
-/* HERO layout */
+/* === HERO layout === */
 .hero {
   position: relative;
   min-height: 80dvh;
@@ -10,7 +10,6 @@
   flex-direction: column; /* mobile: stacked */
 }
 
-/* IMAGE: on mobile je iza teksta */
 .visual {
   position: absolute;
   inset: 0;
@@ -23,7 +22,6 @@
   object-fit: cover;
 }
 
-/* COPY */
 .copy {
   position: relative;
   z-index: 1;
@@ -33,40 +31,40 @@
 
 .kicker {
   display: inline-block;
-  letter-spacing: 0.08em;
-  font-size: 0.75rem;
-  color: #fff;
-  font-weight: 600;
-  text-transform: uppercase;
-  font-family: 'Varta', sans-serif;
   margin-bottom: 20px;
+  font-family: 'Varta', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
 }
 
 .title {
-  color: #fff;
-  font-size: 36px;
   margin: 0.5rem 0 1rem;
   padding: 0 3rem;
+  font-size: 36px;
   font-weight: normal;
+  color: #fff;
 }
 
 .lead {
-  color: #fff;
-  line-height: 1.6;
-  font-family: 'Varta', sans-serif;
-  letter-spacing: 0.8px;
   margin-top: 25px;
+  font-family: 'Varta', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: 0.8px;
+  color: #fff;
 }
 
 .scrollBtn {
   width: 50px;
   height: 50px;
-  border-radius: 50%;
+  margin: 1.5rem auto 0;
   border: 2px solid #e5e7eb;
+  border-radius: 50%;
   background: transparent;
   display: flex;
-  margin: 0 auto;
-  margin-top: 1.5rem;
   justify-content: center;
   align-items: center;
 }
@@ -75,7 +73,7 @@
   color: #fff; /* default (mobile) */
 }
 
-/* SERVICES */
+/* === SERVICES === */
 .services {
   background: #f6f1ec;
   display: flex;
@@ -89,19 +87,19 @@
 }
 
 .servicesTitle {
-  color: #706458;
   font-size: 2rem;
   line-height: 1.2;
   font-weight: normal;
+  color: #706458;
 }
 
 .linkMore {
-  color: #aa7168 ;
-  text-decoration: none;
   display: block;
   margin: 30px 0;
   font-family: 'Viga', sans-serif;
   letter-spacing: 1px;
+  color: #aa7168;
+  text-decoration: none;
 }
 
 .servicesRight {
@@ -118,19 +116,19 @@
 }
 
 .serviceItem h3 {
-  color: #aa7168;
   margin: 0;
   font-size: 21px;
   font-weight: bold;
+  color: #aa7168;
 }
 
 .serviceItem p {
-  color: #7e7267;
   margin: 0;
   line-height: 1.6;
+  color: #7e7267;
 }
 
-/* TRENDS / NEWSLETTER */
+/* === TRENDS / NEWSLETTER === */
 .trends {
   display: flex;
   flex-direction: column;
@@ -143,17 +141,17 @@
 }
 
 .trendsLeft h2 {
-  font-size: 32px;
-  color: #111;
   margin: 0 0 0.5rem;
+  font-size: 32px;
   font-weight: normal;
+  color: #111;
 }
 
 .trendsLeft p {
-  color: #7e7267;
   margin: 0 0 0.5rem;
   font-family: 'Varta', sans-serif;
   font-size: 18px;
+  color: #7e7267;
 }
 
 .trendsForm {
@@ -166,23 +164,27 @@
 .trendsForm input {
   flex: 1 1 auto;
   min-width: 200px;
-  border: none;
-  background: #fcfaf9;
-  border-radius: 6px;
-  letter-spacing: 1px;
   padding: 0.7rem 0.9rem;
+  border: none;
+  border-radius: 6px;
+  background: #fcfaf9;
+  letter-spacing: 1px;
 }
 
 .trendsForm button {
-  background: #534b42;
-  color: #fff;
-  padding: 0.8rem 1rem;
   width: 80%;
+  padding: 0.8rem 1rem;
   font-family: 'Varta', sans-serif;
   letter-spacing: 1px;
+  background: #534b42;
+  color: #fff;
 }
 
-/* INSPIRATIONS */
+.trendsForm button:hover {
+  cursor: pointer;
+}
+
+/* === INSPIRATIONS === */
 .inspirations {
   width: 100vw;
   padding: 2rem 0;
@@ -201,32 +203,31 @@
 .inspTitle {
   max-width: 1200px;
   margin: 0 auto 1rem;
-  color: #534b42;
   font-size: 34px;
   font-weight: normal;
+  color: #534b42;
 }
 
 .inspNote {
   max-width: 900px;
-  margin: 1rem auto 0;
-  color: #7e7267;
+  margin: 1rem auto 30px;
   font-family: 'Varta', sans-serif;
   font-size: 18px;
-  margin-bottom: 30px;
+  color: #7e7267;
 }
 
 .inspPager {
   max-width: 1200px;
   margin: 0.75rem auto 0;
-  color: #7e7267;
   display: none;
+  color: #7e7267;
 }
 
 .inspCtrls {
   display: none;
 }
 
-/* DESKTOP ≥ 1024px */
+/* === DESKTOP ≥ 1024px === */
 @media (min-width: 1024px) {
   .hero {
     min-height: 86dvh;
@@ -246,82 +247,6 @@
     object-fit: cover;
   }
 
-  .services {
-    background: #f6f1ec;
-    display: flex;
-    flex-direction: row;
-    gap: 1.5rem;
-    padding: 4rem 6rem;
-  }
-
-  .servicesTitle {
-    font-size: 42px;
-    padding-right: 50px;
-  }
-
-  .servicesLeft {
-    width: 50%;
-  }
-
-  .servicesRight {
-    width: 50%;
-  }
-
-  .serviceItem {
-    flex: 1 1 35%;
-    padding: 0 50px;
-  }
-  .inspirations {
-    padding-top: 0;
-
-  }
-
-  .inspPager {
-    display: flex;
-    justify-content: center;
-  }
-
-  .inspPager span {
-    font-family: 'Varta', sans-serif;
-  }
-
-  .inspWrap {
-    display: grid;
-    grid-template-rows: auto auto; /* carousel pa container */
-  }
-  .inspirationContainer {
-    display: flex;
-  }
-  .inspCtrls {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-  }
-
-  .inspNote {
-    width: 30%;
-  }
-
-  .inspPagerWrapper {
-    width: 30%;
-  }
-
-  .ctrl {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border: 1px solid #a06056;
-    background: #fff;
-    color: #a06056;
-    font-size: 28px;
-    line-height: 1;
-    display: grid;
-    place-items: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,.06);
-    cursor: pointer;
-  }
-
   .copy {
     flex: 0.9;
     align-self: center;
@@ -331,8 +256,14 @@
     text-align: start;
   }
 
+  .kicker {
+    margin-bottom: 50px;
+    color: #a06056;
+  }
+
   .title {
     font-size: 3rem;
+    font-weight: normal;
     color: #a06056;
     padding: 0;
   }
@@ -340,10 +271,6 @@
   .lead {
     font-size: 18px;
     color: #706458;
-  }
-  .kicker {
-    color: #a06056;
-    margin-bottom: 50px;
   }
 
   .scrollBtn {
@@ -357,6 +284,82 @@
 
   .scrollIcon {
     color: #a06056;
+  }
+
+  .services {
+    flex-direction: row;
+    gap: 1.5rem;
+    padding: 4rem 6rem;
+  }
+
+  .servicesLeft {
+    width: 50%;
+  }
+
+  .servicesRight {
+    width: 50%;
+  }
+
+  .servicesTitle {
+    font-size: 42px;
+    padding-right: 50px;
+  }
+
+  .serviceItem {
+    flex: 1 1 35%;
+    padding: 0 50px;
+  }
+
+  .inspirations {
+    padding-top: 0;
+  }
+
+  .inspWrap {
+    display: grid;
+    grid-template-rows: auto auto;
+  }
+
+  .inspirationContainer {
+    display: flex;
+  }
+
+  .inspNote {
+    width: 30%;
+  }
+
+  .inspPagerWrapper {
+    width: 30%;
+  }
+
+  .inspPager {
+    display: flex;
+    justify-content: center;
+  }
+
+  .inspPager span {
+    font-family: 'Varta', sans-serif;
+  }
+
+  .inspCtrls {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .ctrl {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #a06056;
+    border-radius: 50%;
+    background: #fff;
+    color: #a06056;
+    font-size: 28px;
+    line-height: 1;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    cursor: pointer;
   }
 
   .trends {
@@ -376,7 +379,7 @@
     flex-direction: row;
     width: 40%;
   }
-  
+
   .trendsForm button {
     width: 30%;
   }
