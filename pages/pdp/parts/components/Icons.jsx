@@ -1,6 +1,6 @@
 // components/Icons.jsx
 // eslint-disable-next-line react/prop-types
-export function CaretDown({ size = 30 }) {
+export function CaretDown({ size = 20 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 30 30" fill="none" aria-hidden="true">
       <path d="M7.5 11.25L15 18.75L22.5 11.25" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
