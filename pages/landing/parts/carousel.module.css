@@ -5,7 +5,7 @@
 
 .viewport {
   overflow: hidden;
-  padding: 0.25rem 0;
+  padding: .25rem 0;
 }
 
 .track {
@@ -25,10 +25,10 @@
   flex: 0 0 220px;
   height: 300px;
   margin: 16px 10px;
-  border: 1px solid #eee;
-  border-radius: 14px;
+  border: 1px solid var(--gray-150);
+  border-radius: var(--radius-xl);
   overflow: hidden;
-  background: #fafafa;
+  background: var(--gray-75);
 }
 
 .card img {
@@ -44,25 +44,20 @@
   translate: 0 -50%;
   width: 36px;
   height: 36px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border);
   border-radius: 999px;
-  background: #fff;
-  color: #7a4b3a;
+  background: var(--light);
+  color: var(--landing-brown-hover);
   font-size: 20px;
   line-height: 1;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .06);
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
   cursor: pointer;
 }
 
-.prev {
-  left: -12px;
-}
-
-.next {
-  right: -12px;
-}
+.prev { left: -12px; }
+.next { right: -12px; }
 
 @media (min-width: 1024px) {
   .ctrl {
@@ -75,11 +70,11 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .track { animation: none; }
+}
+
 @keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }

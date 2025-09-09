@@ -1,6 +1,32 @@
+:root {
+  --container-md: 1200px;
+  --radius-md: 8px;
+  --radius-xl: 14px;
+  --gray-150: #eeeeee;
+  --border: #e5e7eb;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-900: #111827;
+  --landing-accent: #a06056;
+  --landing-accent-2: #706458;
+  --landing-cream: #f6f1ec;
+  --landing-brown: #534b42;
+  --landing-brown-hover: #7a4b3a;
+  --landing-text-muted: #7e7267;
+  --landing-accent-soft: #aa7168;
+}
+
+
+
 .page {
   min-height: 100dvh;
   display: grid;
   grid-template-rows: auto 1fr auto;
   font-family: 'Merriweather', serif;
+}
+
+@media (min-width: 1024px) {
+  .page {
+    overflow-x: hidden;
+  }
 }

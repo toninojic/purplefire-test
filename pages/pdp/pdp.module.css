@@ -1,3 +1,60 @@
+/* === Colors & Design Tokens === */
+:root {
+  /* Base palette */
+  --dark: #2b2f33;
+  --light: #ffffff;
+  --muted: #6b7280;
+  --accent: #e23b1f;
+
+  /* Extended palette */
+  --dark-800: #23272b;
+  --dark-700: #3b3f44;
+  --accent-600: #c8341b;
+  --accent-700: #a22b17;
+  --gray-900: #111827;
+  --gray-800: #1f2937;
+  --gray-700: #374151;
+  --gray-600: #4b5563;
+  --gray-500: #6b7280;
+  --gray-400: #9ca3af;
+  --gray-300: #d1d5db;
+  --gray-200: #e5e7eb;
+  --gray-100: #f3f4f6;
+  --gray-50:  #f9fafb;
+
+  /* Borders / surfaces / text */
+  --border: #e5e7eb;
+  --surface: #ffffff;
+  --surface-elev: #ffffff;
+
+  --text: #111111;
+  --text-muted: #6b7280;
+  --text-inverse: #ffffff;
+
+  /* Layout tokens */
+  --container-xl: 1650px;
+  --container: 1400px;
+  --radius: 6px;
+  --radius-lg: 12px;
+
+  /* Effects */
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --fast: 0.16s;
+  --medium: 0.28s;
+
+  /* Additional var for Main page */ 
+  --container-md: 1200px;
+  --radius-md: 8px;
+  --gray-150: #eeeeee;
+  --gray-75:  #fafafa; 
+  --gray-50:  #f4f5f8;
+  --border-soft: #d9d9d9;
+}
+
 .page {
   min-height: 100dvh;
   display: grid;

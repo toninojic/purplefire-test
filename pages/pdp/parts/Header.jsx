@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './header.module.css';
+import { useFavorites } from './src/utils/favorites.js';
+import { getMany } from './src/data/catalog.js';
+import WishlistPopover from './components/WishlistPopover.jsx';
+
 import {
   BurgerMenu,
   CaretDown,
@@ -24,6 +28,8 @@ const NAV_ITEMS = [
 
 export default function Header() {
   const [cartCount] = useState(0);
+  const { favs } = useFavorites();
+  const [wishOpen, setWishOpen] = useState(false);
 
   // mobile menu state
   const [open, setOpen] = useState(false);
@@ -74,10 +80,21 @@ export default function Header() {
         </form>
 
         <div className={styles.actions}>
-          <button className={styles.iconBtn} aria-label="Wishlist">
-            <WishlistIcon />
-          </button>
-
+          {/* WISHLIST + hover dropdown */}
+          <div className={styles.wishWrap}>
+            <button
+              className={styles.iconBtn}
+              aria-label="Wishlist"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <WishlistIcon />
+              {favs.size > 0 && <span className={styles.badge}>{favs.size}</span>}
+            </button>
+            <div className={styles.wishDropdown} role="menu" aria-label="Wishlist items">
+              <WishlistPopover items={getMany(Array.from(favs))} />
+            </div>
+          </div>
           <button className={`${styles.iconBtn} ${styles.cartBtn}`} aria-label="Cart">
             <CartIcon />
             <span className={styles.badge}>{cartCount}</span>
@@ -155,7 +172,24 @@ export default function Header() {
         <div className={styles.mobileIcons}>
           <button className={styles.iconBtn} aria-label="Search"><SearchIcon size={20} /></button>
           <button className={styles.iconBtn} aria-label="Account"><AccountIcon size={20} /></button>
-          <button className={styles.iconBtn} aria-label="Wishlist"><WishlistIcon size={20} /></button>
+          {/* WISHLIST za mobilni sa klik toggle-om */}
+          <div className={styles.wishWrap}>
+            <button
+              className={styles.iconBtn}
+              aria-label="Wishlist"
+              aria-haspopup="true"
+              aria-expanded={wishOpen}
+              onClick={() => setWishOpen((o) => !o)}
+            >
+              <WishlistIcon size={20} />
+              {favs.size > 0 && <span className={styles.badge}>{favs.size}</span>}
+            </button>
+            {wishOpen && (
+              <div className={styles.wishDropdown} role="menu" aria-label="Wishlist items">
+                <WishlistPopover items={getMany(Array.from(favs))} />
+              </div>
+            )}
+          </div>
           <button className={`${styles.iconBtn} ${styles.cartBtn}`} aria-label="Cart">
             <CartIcon size={20} />
             <span className={styles.badge}>{cartCount}</span>

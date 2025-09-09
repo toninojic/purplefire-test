@@ -1,8 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useFavorites } from "./src/utils/favorites.js";
 import styles from "./releated.module.css";
 
 // eslint-disable-next-line react/prop-types
 export default function RelatedProducts({ items = [], money }) {
+  const { isFav, toggle } = useFavorites();
+
   const getPerPage = () =>
     typeof window !== "undefined" && window.innerWidth >= 1024 ? 4 : 2;
 
@@ -60,7 +63,15 @@ export default function RelatedProducts({ items = [], money }) {
                   <article key={`${r.id}-${i}`} className={styles.card}>
                     <div className={styles.cardInfo}>
                         {r.badge && <span className={styles.badge}>{r.badge}</span>}
-                        <button className={styles.wish} aria-label="Add to wishlist">♡</button>
+                        <button
+                         className={`${styles.wish} ${isFav(r.id) ? styles.wishActive : ""}`}
+                          aria-label={isFav(r.id) ? "Remove from wishlist" : "Add to wishlist"}
+                          aria-pressed={isFav(r.id)}
+                          onClick={() => toggle(r.id)}
+                          title={isFav(r.id) ? "Remove from favorites" : "Add to favorites"}
+                        >
+                          {isFav(r.id) ? "♥" : "♡"}
+                        </button>
                         <div className={styles.cardImg}><img src={r.img} alt={r.title} /></div>
                         <button className={styles.cardBtn}>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="20" r="1.5" fill="currentColor"></circle><circle cx="17" cy="20" r="1.5" fill="currentColor"></circle><path d="M3 4h2l2.2 11.1a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.6L22 8H7" stroke="currentColor" strokeWidth="1.6" fill="none"></path></svg>

@@ -37,15 +37,15 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--light);
 }
 
 .title {
   margin: 0.5rem 0 1rem;
   padding: 0 3rem;
   font-size: 36px;
-  font-weight: normal;
-  color: #fff;
+  font-weight: 400;
+  color: var(--light);
 }
 
 .lead {
@@ -54,14 +54,14 @@
   font-size: 16px;
   line-height: 1.6;
   letter-spacing: 0.8px;
-  color: #fff;
+  color: var(--light);
 }
 
 .scrollBtn {
   width: 50px;
   height: 50px;
   margin: 1.5rem auto 0;
-  border: 2px solid #e5e7eb;
+  border: 2px solid var(--border);
   border-radius: 50%;
   background: transparent;
   display: flex;
@@ -70,12 +70,12 @@
 }
 
 .scrollIcon {
-  color: #fff; /* default (mobile) */
+  color: var(--light); /* default (mobile) */
 }
 
 /* === SERVICES === */
 .services {
-  background: #f6f1ec;
+  background: var(--landing-cream);
   display: flex;
   flex-direction: column;
   padding: 2rem;
@@ -89,8 +89,8 @@
 .servicesTitle {
   font-size: 2rem;
   line-height: 1.2;
-  font-weight: normal;
-  color: #706458;
+  font-weight: 400;
+  color: var(--landing-accent-2);
 }
 
 .linkMore {
@@ -98,7 +98,7 @@
   margin: 30px 0;
   font-family: 'Viga', sans-serif;
   letter-spacing: 1px;
-  color: #aa7168;
+  color: var(--landing-accent-soft);
   text-decoration: none;
 }
 
@@ -118,14 +118,14 @@
 .serviceItem h3 {
   margin: 0;
   font-size: 21px;
-  font-weight: bold;
-  color: #aa7168;
+  font-weight: 700;
+  color: var(--landing-accent-soft);
 }
 
 .serviceItem p {
   margin: 0;
   line-height: 1.6;
-  color: #7e7267;
+  color: var(--landing-text-muted);
 }
 
 /* === TRENDS / NEWSLETTER === */
@@ -136,26 +136,26 @@
 }
 
 .trendsLeft {
-  max-width: 1200px;
+  max-width: var(--container-md);
   margin: 0 auto;
 }
 
 .trendsLeft h2 {
   margin: 0 0 0.5rem;
   font-size: 32px;
-  font-weight: normal;
-  color: #111;
+  font-weight: 400;
+  color: var(--text);
 }
 
 .trendsLeft p {
   margin: 0 0 0.5rem;
   font-family: 'Varta', sans-serif;
   font-size: 18px;
-  color: #7e7267;
+  color: var(--landing-text-muted);
 }
 
 .trendsForm {
-  max-width: 1200px;
+  max-width: var(--container-md);
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -166,7 +166,7 @@
   min-width: 200px;
   padding: 0.7rem 0.9rem;
   border: none;
-  border-radius: 6px;
+  border-radius: var(--radius);
   background: #fcfaf9;
   letter-spacing: 1px;
 }
@@ -176,8 +176,8 @@
   padding: 0.8rem 1rem;
   font-family: 'Varta', sans-serif;
   letter-spacing: 1px;
-  background: #534b42;
-  color: #fff;
+  background: var(--landing-brown);
+  color: var(--light);
 }
 
 .trendsForm button:hover {
@@ -201,11 +201,11 @@
 }
 
 .inspTitle {
-  max-width: 1200px;
+  max-width: var(--container-md);
   margin: 0 auto 1rem;
   font-size: 34px;
-  font-weight: normal;
-  color: #534b42;
+  font-weight: 400;
+  color: var(--landing-brown);
 }
 
 .inspNote {
@@ -213,14 +213,14 @@
   margin: 1rem auto 30px;
   font-family: 'Varta', sans-serif;
   font-size: 18px;
-  color: #7e7267;
+  color: var(--landing-text-muted);
 }
 
 .inspPager {
-  max-width: 1200px;
+  max-width: var(--container-md);
   margin: 0.75rem auto 0;
   display: none;
-  color: #7e7267;
+  color: var(--landing-text-muted);
 }
 
 .inspCtrls {
@@ -238,7 +238,7 @@
     position: relative;
     flex: 1.1;
     z-index: 0;
-    background: #f6f1ec;
+    background: var(--landing-cream);
   }
 
   .visual img {
@@ -250,7 +250,7 @@
   .copy {
     flex: 0.9;
     align-self: center;
-    background: #f6f1ec;
+    background: var(--landing-cream);
     padding: 15rem 4rem 4rem 6rem;
     height: -webkit-fill-available;
     text-align: start;
@@ -258,24 +258,24 @@
 
   .kicker {
     margin-bottom: 50px;
-    color: #a06056;
+    color: var(--landing-accent);
   }
 
   .title {
     font-size: 3rem;
-    font-weight: normal;
-    color: #a06056;
+    font-weight: 400;
+    color: var(--landing-accent);
     padding: 0;
   }
 
   .lead {
     font-size: 18px;
-    color: #706458;
+    color: var(--landing-accent-2);
   }
 
   .scrollBtn {
     margin: 0;
-    border: 2px solid #a06056;
+    border: 2px solid var(--landing-accent);
   }
 
   .scrollBtn:hover {
@@ -283,7 +283,7 @@
   }
 
   .scrollIcon {
-    color: #a06056;
+    color: var(--landing-accent);
   }
 
   .services {
@@ -292,13 +292,8 @@
     padding: 4rem 6rem;
   }
 
-  .servicesLeft {
-    width: 50%;
-  }
-
-  .servicesRight {
-    width: 50%;
-  }
+  .servicesLeft { width: 50%; }
+  .servicesRight { width: 50%; }
 
   .servicesTitle {
     font-size: 42px;
@@ -310,26 +305,18 @@
     padding: 0 50px;
   }
 
-  .inspirations {
-    padding-top: 0;
-  }
+  .inspirations { padding-top: 0; }
 
   .inspWrap {
     display: grid;
     grid-template-rows: auto auto;
   }
 
-  .inspirationContainer {
-    display: flex;
-  }
+  .inspirationContainer { display: flex; }
 
-  .inspNote {
-    width: 30%;
-  }
+  .inspNote { width: 30%; }
 
-  .inspPagerWrapper {
-    width: 30%;
-  }
+  .inspPagerWrapper { width: 30%; }
 
   .inspPager {
     display: flex;
@@ -350,10 +337,10 @@
   .ctrl {
     width: 36px;
     height: 36px;
-    border: 1px solid #a06056;
+    border: 1px solid var(--landing-accent);
     border-radius: 50%;
-    background: #fff;
-    color: #a06056;
+    background: var(--light);
+    color: var(--landing-accent);
     font-size: 28px;
     line-height: 1;
     display: grid;

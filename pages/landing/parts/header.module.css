@@ -5,9 +5,9 @@
 }
 
 .inner {
-  max-width: 1200px;
+  max-width: var(--container-md);
   margin: 0 auto;
-  padding: 2rem 1.5rem 1rem 1.5rem;
+  padding: 2rem 1.5rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -15,7 +15,7 @@
 
 .logo {
   font-size: 36px;
-  color: #fff;
+  color: var(--light);
   text-decoration: none;
 }
 
@@ -25,13 +25,13 @@
 }
 
 .navDesktop a {
-  color: #a06056;
+  color: var(--landing-accent);
   font-weight: 500;
   text-decoration: none;
 }
 
 .navDesktop a:hover {
-  color: #111827;
+  color: var(--gray-900);
 }
 
 /* === Hamburger === */
@@ -44,7 +44,7 @@
   align-items: center;
   justify-content: center;
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius);
   background: transparent;
   position: relative;
 }
@@ -52,9 +52,11 @@
 .burger span {
   width: 23px;
   height: 2px;
-  background: #fff;
+  background: var(--light);
   display: block;
-  transition: transform .25s ease, opacity .2s ease, background-color .2s ease;
+  transition: transform var(--medium) var(--ease),
+              opacity var(--fast) var(--ease),
+              background-color var(--fast) var(--ease);
   transform-origin: center;
 }
 
@@ -67,13 +69,13 @@
 }
 
 .burgerOpen span {
-  background: #fff;
+  background: var(--light);
 }
 
 .mobileMenu {
   position: absolute;
   inset: 100% 0 auto 0;
-  padding: 2rem 1.5rem 1rem 1.5rem;
+  padding: 2rem 1.5rem 1rem;
   text-align: right;
 }
 
@@ -85,7 +87,7 @@
 .navMobile a {
   font-size: 18px;
   font-weight: 500;
-  color: #fff;
+  color: var(--light);
   text-decoration: none;
 }
 
@@ -95,7 +97,7 @@
   background: rgba(0,0,0,.6);
   opacity: 1;
   pointer-events: auto;
-  transition: opacity .25s ease;
+  transition: opacity var(--medium) var(--ease);
   z-index: -1; /* header ostaje iznad */
 }
 
@@ -105,7 +107,7 @@
 }
 
 .mobileMenuOpen {
-  animation: fadeDown .22s ease both;
+  animation: fadeDown .22s var(--ease) both;
 }
 
 @media (min-width: 1024px) {
@@ -114,7 +116,7 @@
   }
 
   .logo {
-    color: #a06056;
+    color: var(--landing-accent);
   }
 
   .navDesktop {
@@ -122,7 +124,7 @@
   }
 
   .navDesktop a {
-    color: #706458;
+    color: var(--landing-accent-2);
   }
 
   .header {
