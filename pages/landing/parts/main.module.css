@@ -1,0 +1,373 @@
+.main {
+  padding: 0;
+}
+
+/* === HERO layout === */
+.hero {
+  position: relative;
+  min-height: 80dvh;
+  display: flex;
+  flex-direction: column; /* mobile: stacked */
+}
+
+.visual {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.copy {
+  position: relative;
+  z-index: 1;
+  padding: 12rem 1.25rem;
+  text-align: center;
+}
+
+.kicker {
+  display: inline-block;
+  margin-bottom: 20px;
+  font-family: 'Varta', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--light);
+}
+
+.title {
+  margin: 0.5rem 0 1rem;
+  padding: 0 3rem;
+  font-size: 36px;
+  font-weight: 400;
+  color: var(--light);
+}
+
+.lead {
+  margin-top: 25px;
+  font-family: 'Varta', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: 0.8px;
+  color: var(--light);
+}
+
+.scrollBtn {
+  width: 50px;
+  height: 50px;
+  margin: 1.5rem auto 0;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.scrollIcon {
+  color: var(--light); /* default (mobile) */
+}
+
+/* === SERVICES === */
+.services {
+  background: var(--landing-cream);
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.servicesLeft {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.servicesTitle {
+  font-size: 2rem;
+  line-height: 1.2;
+  font-weight: 400;
+  color: var(--landing-accent-2);
+}
+
+.linkMore {
+  display: block;
+  margin: 30px 0;
+  font-family: 'Viga', sans-serif;
+  letter-spacing: 1px;
+  color: var(--landing-accent-soft);
+  text-decoration: none;
+}
+
+.servicesRight {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  font-family: 'Varta', sans-serif;
+}
+
+.serviceItem {
+  flex: 1 1 100%;
+}
+
+.serviceItem h3 {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--landing-accent-soft);
+}
+
+.serviceItem p {
+  margin: 0;
+  line-height: 1.6;
+  color: var(--landing-text-muted);
+}
+
+/* === TRENDS / NEWSLETTER === */
+.trends {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.trendsLeft {
+  max-width: var(--container-md);
+  margin: 0 auto;
+}
+
+.trendsLeft h2 {
+  margin: 0 0 0.5rem;
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--text);
+}
+
+.trendsLeft p {
+  margin: 0 0 0.5rem;
+  font-family: 'Varta', sans-serif;
+  font-size: 18px;
+  color: var(--landing-text-muted);
+}
+
+.trendsForm {
+  max-width: var(--container-md);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.trendsForm input {
+  flex: 1 1 auto;
+  min-width: 200px;
+  padding: 0.7rem 0.9rem;
+  border: none;
+  border-radius: var(--radius);
+  background: #fcfaf9;
+  letter-spacing: 1px;
+}
+
+.trendsForm button {
+  width: 80%;
+  padding: 0.8rem 1rem;
+  font-family: 'Varta', sans-serif;
+  letter-spacing: 1px;
+  background: var(--landing-brown);
+  color: var(--light);
+}
+
+.trendsForm button:hover {
+  cursor: pointer;
+}
+
+/* === INSPIRATIONS === */
+.inspirations {
+  width: 100vw;
+  padding: 2rem 0;
+}
+
+.inspWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.inspirationContainer {
+  padding: 0 2rem;
+}
+
+.inspTitle {
+  max-width: var(--container-md);
+  margin: 0 auto 1rem;
+  font-size: 34px;
+  font-weight: 400;
+  color: var(--landing-brown);
+}
+
+.inspNote {
+  max-width: 900px;
+  margin: 1rem auto 30px;
+  font-family: 'Varta', sans-serif;
+  font-size: 18px;
+  color: var(--landing-text-muted);
+}
+
+.inspPager {
+  max-width: var(--container-md);
+  margin: 0.75rem auto 0;
+  display: none;
+  color: var(--landing-text-muted);
+}
+
+.inspCtrls {
+  display: none;
+}
+
+/* === DESKTOP ≥ 1024px === */
+@media (min-width: 1024px) {
+  .hero {
+    min-height: 86dvh;
+    flex-direction: row; /* side by side */
+  }
+
+  .visual {
+    position: relative;
+    flex: 1.1;
+    z-index: 0;
+    background: var(--landing-cream);
+  }
+
+  .visual img {
+    width: 100%;
+    height: 99%;
+    object-fit: cover;
+  }
+
+  .copy {
+    flex: 0.9;
+    align-self: center;
+    background: var(--landing-cream);
+    padding: 15rem 4rem 4rem 6rem;
+    height: -webkit-fill-available;
+    text-align: start;
+  }
+
+  .kicker {
+    margin-bottom: 50px;
+    color: var(--landing-accent);
+  }
+
+  .title {
+    font-size: 3rem;
+    font-weight: 400;
+    color: var(--landing-accent);
+    padding: 0;
+  }
+
+  .lead {
+    font-size: 18px;
+    color: var(--landing-accent-2);
+  }
+
+  .scrollBtn {
+    margin: 0;
+    border: 2px solid var(--landing-accent);
+  }
+
+  .scrollBtn:hover {
+    cursor: pointer;
+  }
+
+  .scrollIcon {
+    color: var(--landing-accent);
+  }
+
+  .services {
+    flex-direction: row;
+    gap: 1.5rem;
+    padding: 4rem 6rem;
+  }
+
+  .servicesLeft { width: 50%; }
+  .servicesRight { width: 50%; }
+
+  .servicesTitle {
+    font-size: 42px;
+    padding-right: 50px;
+  }
+
+  .serviceItem {
+    flex: 1 1 35%;
+    padding: 0 50px;
+  }
+
+  .inspirations { padding-top: 0; }
+
+  .inspWrap {
+    display: grid;
+    grid-template-rows: auto auto;
+  }
+
+  .inspirationContainer { display: flex; }
+
+  .inspNote { width: 30%; }
+
+  .inspPagerWrapper { width: 30%; }
+
+  .inspPager {
+    display: flex;
+    justify-content: center;
+  }
+
+  .inspPager span {
+    font-family: 'Varta', sans-serif;
+  }
+
+  .inspCtrls {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .ctrl {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--landing-accent);
+    border-radius: 50%;
+    background: var(--light);
+    color: var(--landing-accent);
+    font-size: 28px;
+    line-height: 1;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    cursor: pointer;
+  }
+
+  .trends {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 4rem 6rem;
+  }
+
+  .trendsLeft,
+  .trendsForm {
+    width: 50%;
+  }
+
+  .trendsForm {
+    flex-direction: row;
+    width: 40%;
+  }
+
+  .trendsForm button {
+    width: 30%;
+  }
+}
