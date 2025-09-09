@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import RelatedProducts from './RelatedProducts'
+import { useEffect, useState } from 'react'
 import styles from './main.module.css'
 
 /** ===== Mock data (simulacija fetch-a) ===== */
@@ -65,6 +66,7 @@ const RELATED = [
     id: 'mi-p1',
     title: 'Mi P1 Smart Android 4K TV',
     price: 400,
+    old: 899.0,
     img: '/images/pdp-rp-2.png',
     badge: 'SALE',
   },
@@ -72,6 +74,7 @@ const RELATED = [
     id: 'konka-oled',
     title: 'Konka OLED Android TV',
     price: 700,
+    old: 899.0,
     img: '/images/pdp-rp-3.png',
     badge: 'HOT',
   },
@@ -79,8 +82,41 @@ const RELATED = [
     id: 'tcl-hdr',
     title: 'TCL Roku Android TV',
     price: 500,
+    old: 899.0,
     img: '/images/pdp-rp-4.png',
-    badge: 'Most Viewing',
+    badge: '-10%',
+  },
+  {
+    id: 'sony-xr',
+    title: 'Sony BRAVIA XR Android TV',
+    price: 800,
+    old: 899.0,
+    img: '/images/pdp-rp-1.png',
+    badge: 'NEW',
+  },
+  {
+    id: 'mi-p1',
+    title: 'Mi P1 Smart Android 4K TV',
+    price: 400,
+    old: 899.0,
+    img: '/images/pdp-rp-2.png',
+    badge: 'SALE',
+  },
+  {
+    id: 'konka-oled',
+    title: 'Konka OLED Android TV',
+    price: 700,
+    old: 899.0,
+    img: '/images/pdp-rp-3.png',
+    badge: 'HOT',
+  },
+  {
+    id: 'tcl-hdr',
+    title: 'TCL Roku Android TV',
+    price: 500,
+    old: 899.0,
+    img: '/images/pdp-rp-4.png',
+    badge: '-10%',
   },
 ]
 
@@ -94,6 +130,38 @@ export default function Main() {
   const [size, setSize] = useState(PRODUCT.options.sizes[0].code)
   const [qty, setQty] = useState(1)
   const [tab, setTab] = useState('desc') // desc | spec | reviews
+
+  useEffect(() => {
+    const isMobile = window.matchMedia('(max-width: 1024px)').matches
+    if (!isMobile) return
+
+    const cta = document.getElementById('cta-block-sentiel')
+    const ctaToUpdate = document.getElementById('cta-block')
+    if (!cta && !ctaToUpdate) return
+
+    let raf = 0
+    const evaluate = () => {
+      raf = 0
+      const rect = cta.getBoundingClientRect()
+      const shouldShow = rect.bottom <= 0
+      ctaToUpdate.classList.toggle(styles.show, shouldShow)
+    }
+
+    const onScroll = () => {
+      if (raf) return
+      raf = requestAnimationFrame(evaluate)
+    }
+
+    evaluate()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+
+    return () => {
+      if (raf) cancelAnimationFrame(raf)
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
+  }, [])
 
   return (
     <main className={styles.main}>
@@ -114,43 +182,76 @@ export default function Main() {
       <section className={styles.panel}>
         {/* Gallery */}
         <div className={styles.gallery}>
-          <div className={styles.thumbs} role="list">
-            {PRODUCT.images.map((img, i) => (
-              <button
-                key={img.src}
-                role="listitem"
-                className={`${styles.thumb} ${i === activeImg ? styles.thumbActive : ''}`}
-                onClick={() => setActiveImg(i)}
-                aria-label={`Image ${i + 1}`}
-              >
-                <img src={img.src} alt="" />
-              </button>
-            ))}
-          </div>
+          {/* thumbs sa strelicama */}
+          <div className={styles.thumbsWrap}>
+            <button
+              className={`${styles.ctrl} ${styles.prev}`}
+              aria-label="Scroll thumbs left"
+              onClick={() => {
+                const el = document.querySelector(`.${styles.thumbs}`)
+                if (!el) return
+                const w = el.firstElementChild?.getBoundingClientRect().width || 64
+                el.scrollBy({ left: -w * 3, behavior: 'smooth' })
+              }}
+            >
+              ‹
+            </button>
 
+            <div className={styles.thumbs} role="list">
+              {PRODUCT.images.map((img, i) => (
+                <button
+                  key={img.src}
+                  role="listitem"
+                  className={`${styles.thumb} ${i === activeImg ? styles.thumbActive : ''}`}
+                  onClick={() => setActiveImg(i)}
+                  aria-label={`Image ${i + 1}`}
+                >
+                  <img src={img.src} alt={img.alt || ''} />
+                </button>
+              ))}
+            </div>
+
+            <button
+              className={`${styles.ctrl} ${styles.next}`}
+              aria-label="Scroll thumbs right"
+              onClick={() => {
+                const el = document.querySelector(`.${styles.thumbs}`)
+                if (!el) return
+                const w = el.firstElementChild?.getBoundingClientRect().width || 64
+                el.scrollBy({ left: w * 3, behavior: 'smooth' })
+              }}
+            >
+              ›
+            </button>
+          </div>
+          {/* glavni stage */}
           <div className={styles.stage}>
-            <img src={PRODUCT.images[activeImg]?.src} alt={PRODUCT.images[activeImg]?.alt || ''} />
+            <img
+              src={PRODUCT.images[activeImg]?.src}
+              alt={PRODUCT.images[activeImg]?.alt || ''}
+            />
             <figcaption className={styles.caption}>
               {PRODUCT.title.split('|')[0].trim()}
             </figcaption>
           </div>
         </div>
 
+
         {/* Info / Buybox */}
         <aside className={styles.info}>
           <ul className={styles.meta}>
-            <li><strong>Brand:</strong> {PRODUCT.brand}</li>
-            <li><strong>Model:</strong> {PRODUCT.model}</li>
-            <li><strong>Availability:</strong> {PRODUCT.availability}</li>
+            <li><span>Brand:</span> {PRODUCT.brand}</li>
+            <li><span>Model:</span> {PRODUCT.model}</li>
+            <li><span>Availability:</span> {PRODUCT.availability}</li>
           </ul>
 
           <h1 className={styles.title}>{PRODUCT.title}</h1>
 
           <div className={styles.rating}>
             {renderStars(PRODUCT.rating.value)}
-            <span className={styles.ratingText}>
+            {/* <span className={styles.ratingText}>
               {PRODUCT.rating.value.toFixed(1)} ({PRODUCT.rating.count})
-            </span>
+            </span> */}
           </div>
 
           <ul className={styles.bullets}>
@@ -171,22 +272,46 @@ export default function Main() {
           </div>
 
           {/* Price + qty + CTAs */}
-          <div className={styles.priceRow}>
+          <div id="cta-block-sentiel" className={styles.priceRow}>
+            <span>USD(incl. of all taxes):</span>
             <div className={styles.price}>
               <strong>{money(PRODUCT.price.current, PRODUCT.price.currency)}</strong>
               <s>{money(PRODUCT.price.old, PRODUCT.price.currency)}</s>
-            </div>
+            </div>           
+          </div>
 
+          <div className={styles.ctas}>
             <div className={styles.qty}>
               <button onClick={() => setQty((q) => Math.max(1, q - 1))} aria-label="Decrease">−</button>
               <input value={qty} onChange={(e) => setQty(Math.max(1, +e.target.value || 1))} />
               <button onClick={() => setQty((q) => q + 1)} aria-label="Increase">+</button>
             </div>
+            <div className={styles.ctasBtns}>
+              <button className={styles.buyNow}>Buy Now</button>
+              <button className={styles.addCart}>Add to Cart</button>
+            </div>
           </div>
 
-          <div className={styles.ctas}>
-            <button className={styles.buyNow}>Buy Now</button>
-            <button className={styles.addCart}>Add to Cart</button>
+          <div id="cta-block" className={styles.ctasSticky}>
+            <div className={styles.priceRow}>
+              <span>USD(incl. of all taxes):</span>
+              <div className={styles.price}>
+                <strong>{money(PRODUCT.price.current, PRODUCT.price.currency)}</strong>
+                <s>{money(PRODUCT.price.old, PRODUCT.price.currency)}</s>
+              </div>           
+            </div>
+
+            <div className={styles.ctas}>
+              <div className={styles.qty}>
+                <button onClick={() => setQty((q) => Math.max(1, q - 1))} aria-label="Decrease">−</button>
+                <input value={qty} onChange={(e) => setQty(Math.max(1, +e.target.value || 1))} />
+                <button onClick={() => setQty((q) => q + 1)} aria-label="Increase">+</button>
+              </div>
+              <div>
+                <button className={styles.buyNow}>Buy Now</button>
+                <button className={styles.addCart}>Add to Cart</button>
+              </div>
+            </div>
           </div>
         </aside>
       </section>
@@ -240,32 +365,14 @@ export default function Main() {
 
           {tab === 'rev' && (
             <div className={styles.reviewsEmpty}>
-              <p>No reviews yet. Be the first to review this item.</p>
+              <p>Suspendisse potenti. Sed dapibus bibendum orci, eget semper diam tincidunt eget. Nulla a mi non nulla fermentum molestie. Aenean magna massa, tempus quis risus nec, sollicitudin consectetur mi. Donec dictum nulla sed nulla semper elementum. Nulla dictum ultrices risus, id ornare arcu rutrum vel. Curabitur vestibulum id nisi at pellentesque. Aenean a lacinia tellus. Aliquam iaculis odio sit amet velit laoreet, non feugiat tellus elementum.</p>
             </div>
           )}
         </div>
       </section>
 
       {/* Related products */}
-      <section className={styles.related}>
-        <h3 className={styles.relatedTitle}>Related Products</h3>
-
-        <div className={styles.cards}>
-          {RELATED.map((r) => (
-            <article key={r.id} className={styles.card}>
-              {r.badge && <span className={styles.badge}>{r.badge}</span>}
-              <button className={styles.wish} aria-label="Add to wishlist">♡</button>
-              <div className={styles.cardImg}><img src={r.img} alt={r.title} /></div>
-              <h4 className={styles.cardTitle}>{r.title}</h4>
-              <div className={styles.cardPrice}>
-                <strong>{money(r.price)}</strong>
-                {r.old && <s>{money(r.old)}</s>}
-              </div>
-              <button className={styles.cardBtn}>Add to cart</button>
-            </article>
-          ))}
-        </div>
-      </section>
+      <RelatedProducts items={RELATED} money={money} />
     </main>
   )
 }
@@ -280,13 +387,13 @@ function renderStars(val) {
     <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
       <path
         d="M12 17.3l-6.2 3.5 1.7-6.9L2 8.9l7-.6L12 2l3 6.3 7 .6-5.5 5 1.7 6.9z"
-        fill={fill} stroke="#fbbf24" strokeWidth="1.4"
+        fill={fill} stroke="#E73C17" strokeWidth="1.4"
       />
     </svg>
   )
   return (
     <span className={styles.stars} aria-label={`${val.toFixed(1)} out of 5`}>
-      {Array.from({ length: full }).map((_, i) => <Star key={`f${i}`} fill="#fbbf24" />)}
+      {Array.from({ length: full }).map((_, i) => <Star key={`f${i}`} fill="#E73C17" />)}
       {half && <Star key="h" fill="url(#half)" />}
       {Array.from({ length: empty }).map((_, i) => <Star key={`e${i}`} fill="none" />)}
     </span>

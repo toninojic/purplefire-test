@@ -1,26 +1,24 @@
-.main {
-  padding: 1rem;
-}
-
 /* top heading + breadcrumb */
 .topbar {
   max-width: 1200px;
   margin: 0 auto 1rem;
   text-align: center;
+  background-color: #F4F5F8;
+  padding: 20px 0;
 }
 
 .collection {
-  letter-spacing: .12em;
-  font-weight: 700;
-  font-size: .9rem;
-  color: #6b7280;
+  font-weight: normal;
+  font-size: 18px;
+  color: #000;
   margin: 0 0 .25rem;
   text-transform: uppercase;
 }
 
 .breadcrumb {
-  color: #9ca3af;
-  font-size: .85rem;
+  color: #000;
+  font-size: 10px;
+  text-transform: uppercase;
 }
 
 .bcItem { }
@@ -29,13 +27,11 @@
 /* main panel */
 .panel {
   max-width: 1200px;
-  margin: 0 auto 1.25rem;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   background: #fff;
-  border: 1px solid #eee;
-  border-radius: 8px;
   padding: 1rem;
 }
 
@@ -43,26 +39,35 @@
 .gallery {
   display: flex;
   gap: 1rem;
+  flex-direction: column-reverse;
 }
 
+.thumbsWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+/* container koji scrolluje */
 .thumbs {
   display: flex;
   gap: .75rem;
-  flex-direction: row;
-  order: 2;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  flex: 1;
+  padding: .25rem;
 }
 
 .thumb {
-  width: 64px;
-  height: 64px;
-  border: 1px solid #eee;
-  border-radius: 8px;
+  flex: 0 0 calc(33.333% - .5rem); /* 3 u nizu */
+  max-width: 120px;
+  aspect-ratio: 1/1;
+  border: 1px solid transparent;
   overflow: hidden;
   background: #fafafa;
-}
-
-.thumbActive {
-  outline: 2px solid #111827;
+  scroll-snap-align: start;
 }
 
 .thumb img {
@@ -70,6 +75,31 @@
   height: 100%;
   object-fit: cover;
 }
+
+.thumbActive {
+  outline: 2px solid var(--accent);
+}
+
+/* strelice */
+.ctrl {
+  display: none;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  color: #111;
+  font-size: 18px;
+  line-height: 1;
+  z-index: 2;
+}
+.prev { left: -12px; }
+.next { right: -12px; }
+
+/* samo na mobilnom se prikazuju strelice i 3 u nizu */
+@media (max-width: 1023px) {
+  .ctrl { display: flex; align-items: center; justify-content: center; }
+}
+
 
 .stage {
   position: relative;
@@ -90,30 +120,41 @@
 
 .caption {
   position: absolute;
-  left: .75rem;
+  left: 50%;
   bottom: .75rem;
+  transform: translate(-50%);
   color: #6b7280;
   font-size: .8rem;
+  width: 69%;
 }
 
 /* info */
 .info { display: flex; flex-direction: column; gap: .75rem; }
 
 .meta {
-  display: grid;
-  grid-template-columns: repeat(3, auto);
-  gap: .5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   padding: 0;
-  margin: 0;
+  margin: 10px 0;
   list-style: none;
   color: #6b7280;
-  font-size: .9rem;
+  font-size: 12px;
+}
+
+.meta li {
+  color: #000;
+}
+
+.meta li span {
+  font-weight: 500;
 }
 
 .title {
   margin: .25rem 0 0;
-  font-size: 1.25rem;
+  font-size: 16px;
   line-height: 1.35;
+  font-weight: 500;
   color: #111827;
 }
 
@@ -123,14 +164,18 @@
   gap: .5rem;
 }
 
-.stars { display: inline-flex; }
+.stars { 
+  display: inline-flex; 
+}
 .ratingText { color: #6b7280; font-size: .9rem; }
 
 .bullets {
   margin: .25rem 0 0;
   padding-left: 1.1rem;
-  color: #6b7280;
   line-height: 1.6;
+  font-size: 13px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #d9d9d9;
 }
 
 .sizes {
@@ -138,27 +183,33 @@
   flex-wrap: wrap;
   gap: .5rem;
   margin-top: .25rem;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #d9d9d9;
 }
 
 .size {
   padding: .4rem .6rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 6px;
+  border: 1px solid transparent;
   background: #fff;
   font-size: .9rem;
 }
 
 .sizeActive {
-  border-color: #111827;
+  border: 1px solid #E73C17;
   box-shadow: 0 0 0 2px rgba(17,24,39,.05);
+  color: #E73C17;
 }
 
 .priceRow {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: start;
   justify-content: space-between;
-  gap: 1rem;
-  margin-top: .5rem;
+  gap: 6px;
+}
+
+.priceRow span {
+  font-size: 10px;
 }
 
 .price {
@@ -172,46 +223,78 @@
 
 .qty {
   display: inline-flex;
-  border: 1px solid #e5e7eb;
-  border-radius: 6px;
   overflow: hidden;
   height: 38px;
 }
 
 .qty button {
-  width: 36px;
-  border: 0;
-  background: #f3f4f6;
+  width: 30px;
+  height: 38px;
+  background: #fff;
+  border: 1px solid #d9d9d9;
   font-size: 1.1rem;
 }
 
 .qty input {
-  width: 48px;
-  border: 0;
+  width: 30px;
+  height: 38px;
+  border: 1px solid #d9d9d9;
   text-align: center;
 }
 
 .ctas {
   display: flex;
   gap: .75rem;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.ctasBtns {
+  display: flex;
 }
 
 .buyNow {
+  height: 38px;
   background: #e23b1f;
   color: #fff;
   border: 0;
-  padding: .75rem 1rem;
-  border-radius: 6px;
+  padding: .75rem 1.5rem;
   font-weight: 600;
+  margin-right: 10px;
 }
 
 .addCart {
+  height: 38px;
   background: #fff;
-  color: #111;
-  border: 1px solid #e5e7eb;
-  padding: .75rem 1rem;
-  border-radius: 6px;
+  color: #e23b1f;
+  border: 1px solid #e23b1f;
+  padding: .75rem 1.5rem;
   font-weight: 600;
+  margin-right: 30px;
+}
+
+.ctasSticky {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: -1000px;
+  background: #fff;
+  border-top: 1px solid #e5e7eb;
+  box-shadow: 0 -2px 8px rgba(0,0,0,.08);
+  padding: .75rem 1rem;
+  transition: bottom .25s ease;
+  z-index: 9999;
+}
+
+.ctasSticky .ctas {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-top: 10px;
+}
+
+.ctasSticky.show {
+  bottom: 0;
 }
 
 /* tabs */
@@ -219,33 +302,33 @@
   max-width: 1200px;
   margin: 0 auto 2rem;
   background: #fff;
-  border: 1px solid #eee;
-  border-radius: 8px;
+  padding: 0 1rem;
 }
 
 .tabBar {
   display: flex;
   gap: .5rem;
-  padding: .5rem .5rem 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #d9d9d9;
+  justify-content: center;
 }
 
 .tab {
-  background: #f3f4f6;
-  border: 1px solid #e5e7eb;
+  background: transparent;
+  border: none;
   padding: .6rem .9rem;
-  border-radius: 6px 6px 0 0;
   font-weight: 600;
+  width: 100px;
 }
 
 .tabActive {
   background: #fff;
-  border-bottom-color: #fff;
+  border-bottom: 1px solid #e23b1f;
 }
 
 .tabPanel {
   padding: 1rem;
   color: #4b5563;
+  font-size: 12px;
 }
 
 .notes {
@@ -264,93 +347,6 @@
 .specRow dt { color: #6b7280; }
 .specRow dd { margin: 0; }
 
-/* related */
-.related {
-  max-width: 1200px;
-  margin: 0 auto 3rem;
-}
-
-.relatedTitle {
-  text-align: center;
-  margin: 0 0 1rem;
-}
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: .9rem;
-}
-
-.card {
-  position: relative;
-  border: 1px solid #eee;
-  border-radius: 10px;
-  background: #fff;
-  padding: .75rem;
-}
-
-.badge {
-  position: absolute;
-  left: .75rem;
-  top: .75rem;
-  background: #10b981;
-  color: #fff;
-  font-size: .7rem;
-  padding: .25rem .4rem;
-  border-radius: 999px;
-}
-
-.wish {
-  position: absolute;
-  right: .75rem;
-  top: .75rem;
-  border: 0;
-  background: #fff;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(0,0,0,.06);
-}
-
-.cardImg {
-  height: 140px;
-  border-radius: 6px;
-  overflow: hidden;
-  background: #fafafa;
-  display: grid;
-  place-items: center;
-}
-
-.cardImg img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.cardTitle {
-  margin: .5rem 0 .25rem;
-  color: #111827;
-}
-
-.cardPrice {
-  display: flex;
-  align-items: baseline;
-  gap: .5rem;
-}
-
-.cardPrice strong { color: #111; }
-.cardPrice s { color: #9ca3af; }
-
-.cardBtn {
-  width: 100%;
-  margin-top: .5rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 6px;
-  background: #fff;
-  padding: .6rem;
-  font-weight: 600;
-}
-
 /* desktop layout */
 @media (min-width: 1024px) {
   .panel {
@@ -359,8 +355,29 @@
     align-items: flex-start;
   }
 
+  .topbar {
+    margin: 0;
+    max-width: 100%;
+    padding: 70px 0;
+  }
+
+  .collection {
+    font-size: 34px;
+    margin-bottom: 12px;
+  }
+
+  .breadcrumb {
+    font-size: 18px;
+    font-weight: 300;
+  }
+
   .gallery {
     flex: 1.2;
+    flex-direction: row;
+  }
+
+  .caption {
+    width: 59%;
   }
 
   .thumbs {
@@ -377,6 +394,34 @@
     padding-left: 1rem;
   }
 
+  .ctas {
+    border-bottom: none;
+  }
+
   .title { font-size: 1.4rem; }
   .cards { grid-template-columns: repeat(4, 1fr); }
+
+  .tabBar {
+    justify-content: space-evenly;
+  }
+
+  .tabs {
+    margin-top: 60px;
+  }
+
+  .tab {
+    width: 170px;
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  .tabPanel {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .tabPanel p {
+    font-size: 16px;
+    line-height: 20px;
+  }
 }
