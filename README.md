@@ -1,6 +1,6 @@
-# PurpleFire — React Dev Test
+# React Dev Test
 
-A small React app built for a developer test at **PurpleFire**.  
+A small React app.  
 It demonstrates client-side routing, a landing page composed of reusable layout components, a product detail page (PDP) powered by mocked data, and a lightweight Wishlist persisted in **localStorage**.  
 **ESLint** is configured for code quality.
 
